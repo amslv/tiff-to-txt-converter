@@ -1,7 +1,9 @@
+from progressbar import ProgressBar
 from osgeo import gdal
 import sys
 import glob as gb
 
+pbar = ProgressBar()
 
 tif_files = gb.glob('*.tif')
 
@@ -11,7 +13,7 @@ for tif_file in tif_files:
 
     converted_file = open(tif_file.replace('.tif', '_CONVERTED.txt'), 'w') 
 
-    for x in range(1, curr_dataset.RasterCount + 1):
+    for x in pbar(range(1, curr_dataset.RasterCount + 1)):
 
         band = curr_dataset.GetRasterBand(x)
 
